@@ -2,16 +2,17 @@ import React from "react";
 
 const Header = () => {
   return (
-    <section className="max-w-7xl mx-auto p-4">
+    <section className="w-23/24 mx-auto  p-4">
       <div className="gap-3">
         <form
           className="
+          
             bg-(--surface)
             border
             border-(--border)
-            rounded-2xl
+            rounded-xl
             p-3
-            transition-colors
+           theme-transition
           "
         >
           <div className="flex flex-col gap-2">
@@ -94,6 +95,8 @@ const Header = () => {
                   font-medium
                   transition-opacity
                   hover:opacity-90
+    cursor-pointer
+
                 "
               >
                 Add

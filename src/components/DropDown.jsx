@@ -14,7 +14,7 @@ const DropDown = () => {
               border-(--border)
               rounded-2xl
               overflow-hidden
-              z-50
+              z-60
               shadow-(--shadow-m)
             "
     >

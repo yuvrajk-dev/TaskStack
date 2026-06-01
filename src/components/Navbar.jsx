@@ -9,7 +9,6 @@ const Navbar = () => {
   return (
     <nav
       className="
-      theme-transition
         w-full h-16 px-8
         flex justify-between items-center
         border-b

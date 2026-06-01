@@ -30,19 +30,20 @@ const ThemeToggleButton = () => {
     >
       <div
         className={`
+        
          
           transition-transform
-          duration-300
-          ease-in-out
+           duration-1000
+    ease-linear
           ${theme ? "translate-y-0" : "-translate-y-6.5"}
         `}
       >
-        <div className="w-full   h-6.5 flex justify-center items-center">
-          <RiSunLine />
+        <div className="w-full   h-6.5 flex justify-center bg-(--text) items-center">
+          <RiSunLine className="text-(--bg)" />
         </div>
 
-        <div className="w-full h-6.5  flex justify-center items-center">
-          <RiMoonLine />
+        <div className="w-full h-6.5  flex justify-center  bg-(--text) items-center">
+          <RiMoonLine className="text-(--bg)" />
         </div>
       </div>
     </button>

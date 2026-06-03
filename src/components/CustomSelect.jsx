@@ -58,7 +58,7 @@ const CustomSelect = ({
             </li>
           ))}
         </ul>
-      )}{" "}
+      )}
     </div>
   );
 };

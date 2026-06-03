@@ -1,16 +1,8 @@
-import React from "react";
-import Header from "./components/Header";
-import TaskSection from "./components/TaskSection";
-import Navbar from "./components/Navbar";
+import appRouter from "./routes/Routes";
+import { RouterProvider } from "react-router";
 
 const App = () => {
-  return (
-    <div className="flex flex-col   h-screen ">
-      <Navbar />
-      <Header />
-      <TaskSection />
-    </div>
-  );
+  return <RouterProvider router={appRouter} />;
 };
 
 export default App;

@@ -1,6 +1,10 @@
 import React from "react";
+import supabase from "../utils/supabase";
+import { useNavigate } from "react-router";
 
-const DropDown = () => {
+const DropDown = ({ username, email }) => {
+  const navigate = useNavigate();
+
   return (
     <div
       className="
@@ -30,14 +34,15 @@ const DropDown = () => {
                     text-(--bg)
                     flex items-center justify-center
                     font-semibold
+                    capitalize
                   "
           >
-            Y
+            {username.charAt(0)}
           </div>
 
           <div>
-            <p className="font-medium ">Yuvraj Kumar</p>
-            <p className="text-sm text-(--text-muted)">yuvraj@example.com</p>
+            <p className="font-medium capitalize ">{username}</p>
+            <p className="text-sm text-(--text-muted)">{email}</p>
           </div>
         </div>
       </div>
@@ -70,6 +75,14 @@ const DropDown = () => {
       </button>
 
       <button
+        onClick={async () => {
+          const { error } = await supabase.auth.signOut();
+          if (error) {
+            console.log(error.message);
+          } else {
+            navigate("/auth", { replace: true });
+          }
+        }}
         className="
        w-full
                 text-left

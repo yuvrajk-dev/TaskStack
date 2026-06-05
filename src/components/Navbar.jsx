@@ -3,7 +3,7 @@ import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 import DropDown from "./DropDown";
 import ThemeToggleButton from "./ThemeToggleButton";
 
-const Navbar = () => {
+const Navbar = ({ username, email }) => {
   const [dropDown, setDropDown] = useState(false);
 
   return (
@@ -44,15 +44,16 @@ const Navbar = () => {
               text-(--bg)
               flex items-center justify-center
               font-semibold
+              capitalize
             "
           >
-            Y
+            {username.charAt(0)}
           </div>
 
           {/* User Info */}
           <div className="text-left hidden sm:block ">
-            <p className="text-sm font-medium ">Yuvraj Kumar</p>
-            <p className="text-xs text-(--text-muted)">@yuvraj</p>
+            <p className="text-sm font-medium ">{username}</p>
+            {/* <p className="text-xs text-(--text-muted)">@yuvraj</p> */}
           </div>
 
           {dropDown ? (
@@ -62,7 +63,7 @@ const Navbar = () => {
           )}
         </button>
 
-        {dropDown && <DropDown />}
+        {dropDown && <DropDown username={username} email={email} />}
       </div>
     </nav>
   );

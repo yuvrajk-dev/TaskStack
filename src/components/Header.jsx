@@ -78,7 +78,7 @@ const Header = ({ setTaskObject }) => {
           flex justify-center items-center
         "
           >
-            Create Task{" "}
+            Create Task
             {isClose ? (
               <RiArrowUpSLine
                 size={20}

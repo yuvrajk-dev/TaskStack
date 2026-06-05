@@ -20,8 +20,8 @@ const ThemeToggleButton = () => {
       onClick={themeToggleHandler}
       className="
       
-        w-7
-        h-7
+        w-9
+        h-9
         overflow-hidden
         border
         border-(--border)
@@ -35,14 +35,14 @@ const ThemeToggleButton = () => {
           transition-transform
            duration-1000
     ease-linear
-          ${theme ? "translate-y-0" : "-translate-y-6.5"}
+          ${theme ? "translate-y-0" : "-translate-y-8.5"}
         `}
       >
-        <div className="w-full   h-6.5 flex justify-center bg-(--text) items-center">
+        <div className="w-full   h-8.5 flex justify-center bg-(--text) items-center">
           <RiSunLine className="text-(--bg)" />
         </div>
 
-        <div className="w-full h-6.5  flex justify-center  bg-(--text) items-center">
+        <div className="w-full h-8.5  flex justify-center  bg-(--text) items-center">
           <RiMoonLine className="text-(--bg)" />
         </div>
       </div>

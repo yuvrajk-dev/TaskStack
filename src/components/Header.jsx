@@ -2,53 +2,90 @@ import React, { useEffect, useState } from "react";
 import CustomSelect from "./CustomSelect";
 import validation from "../utils/validation";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
+import supabase from "../utils/supabase";
+import { useNavigate } from "react-router";
 
-const Header = ({ setTaskObject }) => {
+const Header = ({ getTasks }) => {
   const [selectorIsOpen, setSelectorIsOpen] = useState(null);
 
   const [selectPriority, setSelectPriority] = useState("");
   const [selectStatus, setSelectStatus] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [isClose, setIsClose] = useState(true);
+  const [isClose, setIsClose] = useState(() => {
+    const value = localStorage.getItem("addTask");
+    return value ? value === "true" : true;
+  });
+  const [taskBtn, setTaskBtn] = useState(false);
 
   const [error, setError] = useState({});
 
-  // console.log(description);
+  const navigate = useNavigate();
+  useEffect(() => {
+    localStorage.setItem("addTask", isClose);
+  }, [isClose]);
 
   return (
     <section className="w-23/24 mx-auto   p-4 ">
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          const errors = validation(
-            title,
-            description,
-            selectStatus,
-            selectPriority,
-          );
 
-          if (Object.keys(errors).length > 0) {
-            setError(errors);
-            return;
+          try {
+            const validationErrors = validation(
+              title,
+              description,
+              selectStatus,
+              selectPriority,
+            );
+
+            if (Object.keys(validationErrors).length > 0) {
+              setError(validationErrors);
+
+              return;
+            }
+            setTaskBtn(true);
+
+            const {
+              data: { user },
+            } = await supabase.auth.getUser();
+
+            if (!user) {
+              alert("User not found");
+              navigate("/auth", { replace: true });
+              return;
+            }
+
+            const task = {
+              title,
+              user_id: user.id,
+              description,
+              status: selectStatus,
+              priority: selectPriority,
+            };
+
+            const { error: insertError } = await supabase
+              .from("tasks")
+              .insert(task);
+
+            if (insertError) {
+              console.log(insertError);
+
+              return;
+            }
+
+            await getTasks();
+
+            setDescription("");
+            setSelectPriority("");
+            setSelectStatus("");
+            setTitle("");
+            setError({});
+          } catch (error) {
+            console.log(error);
+          } finally {
+            setTaskBtn(false);
           }
-
-          const task = {
-            id: crypto.randomUUID(),
-            title,
-            description,
-            status: selectStatus,
-            priority: selectPriority,
-          };
-
-          setTaskObject((prev) => {
-            return [task, ...prev];
-          });
-          setDescription("");
-          setSelectPriority("");
-          setSelectStatus("");
-          setTitle("");
-          setError({});
         }}
         className="
     bg-(--surface)
@@ -239,17 +276,20 @@ scrollbar-hide
             </div>
 
             <button
+              disabled={taskBtn}
               type="submit"
               className="
+               disabled:bg-(--text)/70
+               disabled:cursor-not-allowed
           h-10
           rounded-xl
-          bg-(--primary)
+          bg-(--text)
           text-(--bg)
           font-medium
           cursor-pointer
         "
             >
-              Add Task
+              {taskBtn ? "Adding..." : "Add Task"}
             </button>
           </div>
         </div>

@@ -42,7 +42,7 @@ const CustomSelect = ({
         )}
       </button>
       {isOpen === placeholder && (
-        <ul className="absolute border z-50 rounded-xl   w-full top-full mt-1 border-(--bg) shadow-(--shadow-m) bg-(--surface)">
+        <ul className="absolute border z-50 rounded-xl    w-full top-full mt-1 border-(--bg) shadow-(--shadow-m) bg-(--surface)">
           {options.map((option) => (
             <li
               key={option}

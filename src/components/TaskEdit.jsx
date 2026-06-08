@@ -22,35 +22,53 @@ const TaskEdit = ({
   setError,
   getTasks,
   isEdit,
+  error,
 }) => {
   return (
     isEdit && (
       <>
-        <textarea
-          value={editTitle}
-          onChange={(e) => {
-            setEditTitle(e.target.value);
-          }}
-          maxLength={40}
-          className=" font-semibold wrap-break-word w-full  border
-          border-(--border) pl-1 outline-none  rounded-2xl pt-1 resize-none "
-        />
+        <div>
+          <textarea
+            value={editTitle}
+            onChange={(e) => {
+              setError((prev) => ({ ...prev, titleError: "" }));
+              setEditTitle(e.target.value);
+            }}
+            maxLength={40}
+            className=" font-semibold wrap-break-word w-full  border
+          border-(--border) pl-1 outline-none block rounded-2xl pt-1 resize-none "
+          />
+          {error.titleError && (
+            <p className="text-red-500 text-xs pl-2">{error.titleError}</p>
+          )}
+        </div>
 
-        <textarea
-          value={editDescription}
-          onChange={(e) => {
-            setEditDescription(e.target.value);
-          }}
-          maxLength={300}
-          className=" border
-          border-(--border) text-sm wrap-break-word pt-1  outline-none pl-1 resize-none w-full   rounded-2xl scrollbar-hide  "
-        />
+        <div>
+          <textarea
+            value={editDescription}
+            onChange={(e) => {
+              setError((prev) => ({ ...prev, descriptionError: "" }));
+              setEditDescription(e.target.value);
+            }}
+            maxLength={300}
+            className=" border
+          border-(--border) text-sm wrap-break-word pt-1 block outline-none pl-1 resize-none w-full   rounded-2xl scrollbar-hide  "
+          />
+          {error.descriptionError && (
+            <p className="text-red-500 text-xs pl-2">
+              {error.descriptionError}
+            </p>
+          )}
+        </div>
 
         <div className="flex   flex-col  gap-2 justify-between items-center">
           <div className="flex  gap-2  w-full justify-between items-center">
             <button
               type="button"
-              onClick={cancelEdit}
+              onClick={() => {
+                setError({});
+                cancelEdit();
+              }}
               className={`
             text-xs
             rounded-full
@@ -79,7 +97,7 @@ cursor-default
                   );
 
                   if (Object.keys(validationErrors).length > 0) {
-                    console.log(validationErrors);
+                    setError(validationErrors);
 
                     return;
                   }
@@ -102,6 +120,7 @@ cursor-default
 
                   await getTasks();
                   setIsEdit(false);
+                  setError({});
                 } catch (error) {
                   console.log(error);
                 } finally {

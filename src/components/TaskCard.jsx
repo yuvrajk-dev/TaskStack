@@ -49,6 +49,10 @@ const TaskCard = ({ title, description, priority, status, id, getTasks }) => {
 
   return (
     <div
+      draggable
+      onDragStart={(e) => {
+        e.dataTransfer.setData("taskId", String(id));
+      }}
       id={id}
       className="
       
@@ -99,6 +103,7 @@ const TaskCard = ({ title, description, priority, status, id, getTasks }) => {
         setError={setError}
         getTasks={getTasks}
         isEdit={isEdit}
+        error={error}
       />
     </div>
   );

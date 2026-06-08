@@ -8,7 +8,7 @@ const DropDown = ({ username, email, setDropDown }) => {
   const buttons = [
     { title: "DashBoard", link: "dashboard" },
     { title: "Profile", link: "profile" },
-    { title: "Settings", link: "settings" },
+    // { title: "Settings", link: "settings" },
   ];
 
   return (
@@ -60,7 +60,7 @@ const DropDown = ({ username, email, setDropDown }) => {
           <NavLink
             key={button.link}
             to={button.link}
-            onClick={(e) => {
+            onClick={() => {
               // e.preventDefault();
               setDropDown(false);
             }}

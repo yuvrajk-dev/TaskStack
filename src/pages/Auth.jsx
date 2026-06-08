@@ -118,6 +118,7 @@ const Auth = () => {
                   className="
                   w-full
               h-11
+              capitalize
               px-3
               rounded-xl
               border

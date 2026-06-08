@@ -1,9 +1,15 @@
 import React from "react";
 import supabase from "../utils/supabase";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
-const DropDown = ({ username, email }) => {
+const DropDown = ({ username, email, setDropDown }) => {
   const navigate = useNavigate();
+
+  const buttons = [
+    { title: "DashBoard", link: "dashboard" },
+    { title: "Profile", link: "profile" },
+    { title: "Settings", link: "settings" },
+  ];
 
   return (
     <div
@@ -48,31 +54,29 @@ const DropDown = ({ username, email }) => {
       </div>
 
       {/* Menu Items */}
-      <button
-        className="   w-full
-                text-left
-                px-4 py-3
-                text-sm
-                hover:bg-(--bg)
-                transition
-             
-              "
-      >
-        Profile
-      </button>
 
-      <button
-        className="
-                w-full
+      {buttons.map((button) => {
+        return (
+          <NavLink
+            key={button.link}
+            to={button.link}
+            onClick={(e) => {
+              // e.preventDefault();
+              setDropDown(false);
+            }}
+            className={({ isActive }) => `w-full
                 text-left
                 px-4 py-3
                 text-sm
                 hover:bg-(--bg)
                 transition
-              "
-      >
-        Settings
-      </button>
+                block
+                ${isActive ? "bg-(--bg)" : ""}`}
+          >
+            {button.title}
+          </NavLink>
+        );
+      })}
 
       <button
         onClick={async () => {

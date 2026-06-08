@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 import DropDown from "./DropDown";
 import ThemeToggleButton from "./ThemeToggleButton";
+import { useNavigate } from "react-router";
 
 const Navbar = ({ username, email }) => {
   const [dropDown, setDropDown] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <nav
@@ -17,7 +20,9 @@ const Navbar = ({ username, email }) => {
       "
     >
       {/* Logo */}
-      <h1 className="text-xl font-bold ">TaskStack</h1>
+      <h1 className="text-xl font-bold " onClick={() => navigate("dashboard")}>
+        TaskStack
+      </h1>
 
       {/* Profile Dropdown */}
       <div className="relative flex justify-center gap-3 items-center    ">
@@ -52,7 +57,7 @@ const Navbar = ({ username, email }) => {
 
           {/* User Info */}
           <div className="text-left hidden sm:block ">
-            <p className="text-sm font-medium ">{username}</p>
+            <p className="text-sm font-medium capitalize">{username}</p>
             {/* <p className="text-xs text-(--text-muted)">@yuvraj</p> */}
           </div>
 
@@ -63,7 +68,13 @@ const Navbar = ({ username, email }) => {
           )}
         </button>
 
-        {dropDown && <DropDown username={username} email={email} />}
+        {dropDown && (
+          <DropDown
+            setDropDown={setDropDown}
+            username={username}
+            email={email}
+          />
+        )}
       </div>
     </nav>
   );

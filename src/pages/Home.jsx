@@ -50,7 +50,7 @@ const Home = () => {
     return (
       <div className="flex flex-col    h-screen ">
         <Navbar username={username} email={email} />
-        <Outlet />
+        <Outlet context={[username]} />
       </div>
     );
   }

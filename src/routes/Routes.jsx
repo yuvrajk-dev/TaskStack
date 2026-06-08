@@ -4,6 +4,8 @@ import Auth from "../pages/Auth";
 import Dashboard from "../pages/Dashboard";
 import ProtectedRoutes from "./ProtectedRoutes";
 import PublicRoutes from "./PublicRoutes";
+import Settings from "../pages/Settings";
+import Profile from "../pages/Profile";
 
 const appRouter = createBrowserRouter([
   { path: "/", element: <Navigate to="/auth" replace /> },
@@ -22,7 +24,12 @@ const appRouter = createBrowserRouter([
         <Home />
       </ProtectedRoutes>
     ),
-    children: [{ index: true, element: <Dashboard /> }],
+    children: [
+      { index: true, element: <Dashboard /> },
+      { path: "dashboard", element: <Dashboard /> },
+      { path: "settings", element: <Settings /> },
+      { path: "profile", element: <Profile /> },
+    ],
   },
 ]);
 

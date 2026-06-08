@@ -1,6 +1,7 @@
-import React from "react";
 import CustomSelect from "./CustomSelect";
 import supabase from "../utils/supabase";
+import validation from "../utils/validation";
+import toast from "react-hot-toast";
 
 const TaskEdit = ({
   id,
@@ -14,7 +15,6 @@ const TaskEdit = ({
   setEditPriority,
   setEditStatus,
   cancelEdit,
-  validation,
   setEditLoading,
   setIsEdit,
   selectorIsOpen,
@@ -115,14 +115,17 @@ cursor-default
 
                   if (updateError) {
                     console.log(updateError);
+                    toast.error("Failed to update task");
                     return;
                   }
 
                   await getTasks();
                   setIsEdit(false);
                   setError({});
+                  toast.success("Task updated");
                 } catch (error) {
                   console.log(error);
+                  toast.error("Something went wrong");
                 } finally {
                   setEditLoading(false);
                 }

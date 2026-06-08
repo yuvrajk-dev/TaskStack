@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import TaskSection from "../components/TaskSection";
 import supabase from "../utils/supabase";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
   const [taskObject, setTaskObject] = useState([]);
@@ -22,6 +23,7 @@ const Dashboard = () => {
     } catch (error) {
       setTaskObject([]);
       console.log(error.message);
+      toast.error("Failed to load tasks");
     } finally {
       setGetTaskLoading(false);
     }

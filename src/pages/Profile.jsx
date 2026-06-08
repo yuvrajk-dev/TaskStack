@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useOutletContext } from "react-router";
 import supabase from "../utils/supabase";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   const [username, id, getData] = useOutletContext();
@@ -33,8 +34,10 @@ const Profile = () => {
       await getData();
       setChangeUsername("");
       setErrors("");
+      toast.success("Username updated");
     } catch (error) {
       setErrors(error.message);
+      toast.error("Failed to update username");
     } finally {
       setLoading(false);
     }

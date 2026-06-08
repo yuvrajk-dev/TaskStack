@@ -1,6 +1,7 @@
 import { useState } from "react";
 import supabase from "../utils/supabase";
 import TaskCard from "./TaskCard";
+import toast from "react-hot-toast";
 
 const TaskSection = ({ taskObject = [], getTasks, getTaskLoading }) => {
   const columns = [
@@ -14,6 +15,9 @@ const TaskSection = ({ taskObject = [], getTasks, getTaskLoading }) => {
   return (
     <section className="w-[96%]  min-h-0   mx-auto flex-1 p-5 pb-0 mb-2 border-(--border) border rounded-xl  bg-(--surface)  md:flex-row flex flex-col gap-5 overflow-y-auto justify-start items-center md:justify-center md:items-start scrollbar-hide  ">
       {columns.map(({ title, statusCheck }) => {
+        const columnTask = taskObject?.filter(({ status }) => {
+          return status === statusCheck;
+        });
         return (
           <div
             onDragOver={(e) => {
@@ -42,13 +46,16 @@ const TaskSection = ({ taskObject = [], getTasks, getTaskLoading }) => {
                   .eq("id", taskId);
 
                 if (error) {
+                  toast.error("Failed to move task");
                   console.log(error);
                   return;
                 }
 
                 await getTasks();
+                toast.success(`Moved to ${statusCheck}`);
               } catch (error) {
                 console.log(error);
+                toast.error("Something went wrong");
               } finally {
                 setWait(false);
               }
@@ -62,27 +69,26 @@ const TaskSection = ({ taskObject = [], getTasks, getTaskLoading }) => {
             <div
               className={`flex-1 ${wait && "cursor-not-allowed"}   pt-5 gap-5 flex pb-70 flex-col md:overflow-y-auto scrollbar-hide `}
             >
-              {taskObject
-                ?.filter(({ status }) => {
-                  return status === statusCheck;
-                })
-                .map(
-                  ({ id, title, description, status, priority, createdAt }) => {
-                    return (
-                      <TaskCard
-                        getTaskLoading={getTaskLoading}
-                        getTasks={getTasks}
-                        key={id}
-                        title={title}
-                        description={description}
-                        status={status}
-                        priority={priority}
-                        id={id}
-                        createdAt={createdAt}
-                      />
-                    );
-                  },
-                )}
+              {columnTask.length === 0 && (
+                <p className="text-center text-(--text-muted)">No tasks</p>
+              )}
+              {columnTask.map(
+                ({ id, title, description, status, priority, createdAt }) => {
+                  return (
+                    <TaskCard
+                      getTaskLoading={getTaskLoading}
+                      getTasks={getTasks}
+                      key={id}
+                      title={title}
+                      description={description}
+                      status={status}
+                      priority={priority}
+                      id={id}
+                      createdAt={createdAt}
+                    />
+                  );
+                },
+              )}
             </div>
           </div>
         );

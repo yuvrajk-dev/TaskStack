@@ -1,9 +1,8 @@
 import supabase from "../utils/supabase";
 import { useState } from "react";
-import CustomSelect from "./CustomSelect";
-import validation from "../utils/validation";
 import TaskView from "./TaskView";
 import TaskEdit from "./TaskEdit";
+import toast from "react-hot-toast";
 
 const TaskCard = ({ title, description, priority, status, id, getTasks }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -37,14 +36,24 @@ const TaskCard = ({ title, description, priority, status, id, getTasks }) => {
   };
 
   const deleteTask = async (id) => {
-    setEditLoading(true);
-    const { error } = await supabase.from("tasks").delete().eq("id", id);
-    if (error) {
-      console.log(error.message);
+    try {
+      setEditLoading(true);
+
+      const { error } = await supabase.from("tasks").delete().eq("id", id);
+
+      if (error) {
+        toast.error("Failed to delete task");
+        return;
+      }
+
+      await getTasks();
+      toast.success("Task deleted");
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    } finally {
       setEditLoading(false);
     }
-    await getTasks();
-    setEditLoading(false);
   };
 
   return (
@@ -95,7 +104,6 @@ const TaskCard = ({ title, description, priority, status, id, getTasks }) => {
         setEditPriority={setEditPriority}
         setEditStatus={setEditStatus}
         cancelEdit={cancelEdit}
-        validation={validation}
         setEditLoading={setEditLoading}
         setIsEdit={setIsEdit}
         selectorIsOpen={selectorIsOpen}

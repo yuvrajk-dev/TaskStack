@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { Outlet } from "react-router";
 import supabase from "../utils/supabase";
 import HomeShimmer from "../shimmer/HomeShimmer";
+import toast from "react-hot-toast";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -37,6 +38,7 @@ const Home = () => {
       if (data) setUsername(data.username);
     } catch (error) {
       console.log(error);
+      toast.error("Failed to load profile");
     } finally {
       setLoading(false);
     }

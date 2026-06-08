@@ -4,6 +4,7 @@ import ThemeToggleButton from "../components/ThemeToggleButton";
 import authValidation from "../utils/authValidation";
 import supabase from "../utils/supabase";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 const Auth = () => {
   const [isLogin, setisLogin] = useState(() => {
@@ -50,7 +51,7 @@ const Auth = () => {
             className="flex flex-col  gap-4"
             onSubmit={async (e) => {
               e.preventDefault();
-              setLoading(true);
+
               const errors = authValidation(
                 username,
                 email,
@@ -58,41 +59,51 @@ const Auth = () => {
                 confirmPassword,
                 isLogin,
               );
-
               setErrors(errors);
+
+              if (Object.keys(errors).length > 0) {
+                return;
+              }
+
+              setLoading(true);
+
               try {
-                if (Object.keys(errors).length === 0) {
-                  if (isLogin) {
-                    const { error } = await supabase.auth.signInWithPassword({
-                      email,
-                      password,
-                    });
-                    if (error) {
-                      setSupabaseErrors(error.message);
-                    } else {
-                      navigate("/home", { replace: true });
-                    }
+                if (isLogin) {
+                  const { error } = await supabase.auth.signInWithPassword({
+                    email,
+                    password,
+                  });
+                  if (error) {
+                    setSupabaseErrors(error.message);
+                    toast.error(error.message);
                   } else {
-                    const { data: authData, error } =
-                      await supabase.auth.signUp({
-                        email,
-                        password,
-                      });
-                    if (error) {
-                      setSupabaseErrors(error.message);
-                    } else {
-                      const { error: profileError } = await supabase
-                        .from("profiles")
-                        .insert({ id: authData.user.id, username });
+                    setSupabaseErrors("");
+                    toast.success("Welcome back!");
+                    navigate("/home", { replace: true });
+                  }
+                } else {
+                  const { data: authData, error } = await supabase.auth.signUp({
+                    email,
+                    password,
+                  });
+                  if (error) {
+                    setSupabaseErrors(error.message);
+                    toast.error(error.message);
+                  } else {
+                    const { error: profileError } = await supabase
+                      .from("profiles")
+                      .insert({ id: authData.user.id, username });
 
-                      if (profileError) throw profileError;
+                    if (profileError) throw profileError;
 
-                      navigate("/home", { replace: true });
-                    }
+                    navigate("/home", { replace: true });
+                    toast.success("Account created!");
+                    setSupabaseErrors("");
                   }
                 }
               } catch {
-                setSupabaseErrors("something went wrong");
+                setSupabaseErrors("Something went wrong");
+                toast.error("Something went wrong");
               } finally {
                 setLoading(false);
               }
@@ -281,6 +292,7 @@ const Auth = () => {
                 setErrors({});
                 setEmail("");
                 setPassword("");
+                setSupabaseErrors("");
               }}
               type="button"
               className="text-blue-500 ml-1 hover:text-blue-700 cursor-pointer"

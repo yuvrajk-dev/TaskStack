@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CustomSelect from "./CustomSelect";
 import validation from "../utils/validation";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 import supabase from "../utils/supabase";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 const Header = ({ getTasks }) => {
   const [selectorIsOpen, setSelectorIsOpen] = useState(null);
@@ -51,7 +52,7 @@ const Header = ({ getTasks }) => {
             } = await supabase.auth.getUser();
 
             if (!user) {
-              alert("User not found");
+              toast.error("Session expired. Please login again.");
               navigate("/auth", { replace: true });
               return;
             }
@@ -70,7 +71,7 @@ const Header = ({ getTasks }) => {
 
             if (insertError) {
               console.log(insertError);
-
+              toast.error("Failed to add task!");
               return;
             }
 
@@ -81,8 +82,10 @@ const Header = ({ getTasks }) => {
             setSelectStatus("");
             setTitle("");
             setError({});
+            toast.success("Task added!");
           } catch (error) {
             console.log(error);
+            toast.error("Something went wrong!");
           } finally {
             setTaskBtn(false);
           }
@@ -234,7 +237,7 @@ scrollbar-hide
             {description.length >= 1 && (
               <div className=" flex justify-end items-center absolute right-2 bottom-1">
                 <p
-                  className={`${description.length === 300 ? "text-red-500" : "text(--text-muted)"} text-xs`}
+                  className={`${description.length === 300 ? "text-red-500" : "text-(--text-muted)"} text-xs`}
                 >
                   {description.length}/300
                 </p>

@@ -1,6 +1,7 @@
 import React from "react";
 import supabase from "../utils/supabase";
 import { NavLink, useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 const DropDown = ({ username, email, setDropDown }) => {
   const navigate = useNavigate();
@@ -83,7 +84,10 @@ const DropDown = ({ username, email, setDropDown }) => {
           const { error } = await supabase.auth.signOut();
           if (error) {
             console.log(error.message);
+            toast.error("Failed to logout");
           } else {
+            toast.success("Logged out");
+            setDropDown(false);
             navigate("/auth", { replace: true });
           }
         }}

@@ -53,7 +53,7 @@ const TaskSection = ({ taskObject = [], getTasks, getTaskLoading }) => {
                 await getTasks();
                 toast.success(`Moved to ${statusCheck}`);
               } catch (error) {
-                toast.error("Something went wrong");
+                toast.error(error.message);
               } finally {
                 setWait(false);
               }

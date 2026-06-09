@@ -83,7 +83,7 @@ const Header = ({ getTasks }) => {
             setSelectorIsOpen(null);
             setTitle("");
             setError({});
-            setIsClose(false);
+            setIsClose(true);
             toast.success("Task added!");
           } catch (error) {
             toast.error(error.message);

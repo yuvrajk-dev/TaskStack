@@ -49,7 +49,7 @@ const TaskCard = ({ title, description, priority, status, id, getTasks }) => {
       await getTasks();
       toast.success("Task deleted");
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error(error.message);
     } finally {
       setEditLoading(false);
     }

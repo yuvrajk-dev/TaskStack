@@ -123,7 +123,7 @@ cursor-default
                   setError({});
                   toast.success("Task updated");
                 } catch (error) {
-                  toast.error("Something went wrong");
+                  toast.error(error.message);
                 } finally {
                   setEditLoading(false);
                 }

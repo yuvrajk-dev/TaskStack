@@ -10,7 +10,7 @@ body *::after {
   transition:
     background-color 300ms ease,
     border-color 300ms ease,
-    color 300ms ease;
+    color 10ms ease;
 }
 
 :root {
@@ -83,7 +83,7 @@ body {
 
   transition:
     background-color 0.3s ease,
-    color 0.3s ease;
+    color 10ms ease;
 }
 
 .scrollbar-hide {

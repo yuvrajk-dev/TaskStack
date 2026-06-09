@@ -6,6 +6,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import PublicRoutes from "./PublicRoutes";
 import Profile from "../pages/Profile";
 import LandingPage from "../pages/LandingPage";
+import { Navigate } from "react-router";
 
 const appRouter = createBrowserRouter([
   { path: "/", element: <LandingPage /> },
@@ -31,6 +32,7 @@ const appRouter = createBrowserRouter([
       { path: "profile", element: <Profile /> },
     ],
   },
+  { path: "*", element: <Navigate to="/auth" replace /> },
 ]);
 
 export default appRouter;

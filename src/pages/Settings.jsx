@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import supabase from "../utils/supabase";
+import { useState } from "react";
 
 const Settings = () => {
   const [loading, setLoading] = useState(false);
@@ -10,7 +9,6 @@ const Settings = () => {
       setLoading(true);
       setError("");
 
-      // You'll implement actual deletion later
       alert("Account deletion not implemented yet");
     } catch (error) {
       setError(error.message);

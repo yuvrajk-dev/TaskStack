@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import supabase from "../utils/supabase";
 import { useNavigate } from "react-router";
 import HomeShimmer from "../shimmer/HomeShimmer";

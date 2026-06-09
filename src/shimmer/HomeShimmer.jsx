@@ -3,7 +3,6 @@ const HomeShimmer = () => {
 
   return (
     <div className="flex flex-col h-screen">
-      {/* Navbar Skeleton */}
       <nav
         className="
         w-full h-16 px-8
@@ -13,12 +12,9 @@ const HomeShimmer = () => {
         bg-(--surface)
       "
       >
-        {/* Logo */}
         <div className="h-7 w-28 rounded bg-(--bg) animate-pulse" />
 
-        {/* Profile */}
         <div className="flex items-center gap-3">
-          {/* Theme Toggle */}
           <div className="h-9 w-9 rounded-full bg-(--bg) animate-pulse" />
 
           <div
@@ -28,21 +24,16 @@ const HomeShimmer = () => {
             rounded-2xl
           "
           >
-            {/* Avatar */}
             <div className="w-9 h-9 rounded-full bg-(--bg) animate-pulse" />
 
-            {/* Username */}
             <div className="hidden sm:flex flex-col gap-2">
               <div className="h-3 w-20 rounded bg-(--bg) animate-pulse" />
             </div>
 
-            {/* Arrow */}
             <div className="h-5 w-5 rounded bg-(--bg) animate-pulse" />
           </div>
         </div>
       </nav>
-
-      {/* header shimmer */}
 
       <section className="w-23/24 mx-auto p-4">
         <div
@@ -55,18 +46,15 @@ const HomeShimmer = () => {
         "
         >
           <div className="flex flex-col md:flex-row gap-4">
-            {/* Left */}
             <div className="flex-1 flex flex-col gap-2">
               <div className="h-10 rounded-xl bg-(--bg) animate-pulse" />
               <div className="h-10 rounded-xl bg-(--bg) animate-pulse" />
             </div>
 
-            {/* Center */}
             <div className="flex-2">
               <div className="h-23 rounded-xl bg-(--bg) animate-pulse" />
             </div>
 
-            {/* Right */}
             <div className="flex-1 flex flex-col gap-2">
               <div className="h-10 rounded-xl bg-(--bg) animate-pulse" />
 
@@ -75,8 +63,6 @@ const HomeShimmer = () => {
           </div>
         </div>
       </section>
-
-      {/* Main Content Skeleton */}
 
       <section
         className="
@@ -94,12 +80,10 @@ const HomeShimmer = () => {
             gap-5
           "
           >
-            {/* Column Header */}
             <div className="p-4 border-b border-(--border)">
               <div className="h-5 w-28 mx-auto rounded bg-(--bg) animate-pulse" />
             </div>
 
-            {/* Fake Cards */}
             {[1, 2, 3].map((card) => (
               <div
                 key={card}

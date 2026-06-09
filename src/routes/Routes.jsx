@@ -1,14 +1,14 @@
-import { createBrowserRouter, Navigate } from "react-router";
+import { createBrowserRouter } from "react-router";
 import Home from "../pages/Home";
 import Auth from "../pages/Auth";
 import Dashboard from "../pages/Dashboard";
 import ProtectedRoutes from "./ProtectedRoutes";
 import PublicRoutes from "./PublicRoutes";
-import Settings from "../pages/Settings";
 import Profile from "../pages/Profile";
+import LandingPage from "../pages/LandingPage";
 
 const appRouter = createBrowserRouter([
-  { path: "/", element: <Navigate to="/auth" replace /> },
+  { path: "/", element: <LandingPage /> },
   {
     path: "/auth",
     element: (

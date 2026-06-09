@@ -11,28 +11,20 @@ const AuthShimmer = () => {
           animate-pulse
         "
       >
-        {/* Logo */}
         <div className="h-8 w-32 mx-auto rounded bg-(--bg)" />
 
-        {/* Subtitle */}
         <div className="h-4 w-24 mx-auto mt-3 mb-6 rounded bg-(--bg)" />
 
-        {/* Username */}
         <div className="h-11 w-full rounded-xl bg-(--bg) mb-4" />
 
-        {/* Email */}
         <div className="h-11 w-full rounded-xl bg-(--bg) mb-4" />
 
-        {/* Password */}
         <div className="h-11 w-full rounded-xl bg-(--bg) mb-4" />
 
-        {/* Confirm Password */}
         <div className="h-11 w-full rounded-xl bg-(--bg) mb-4" />
 
-        {/* Button */}
         <div className="h-11 w-full rounded-xl bg-(--bg) mt-2" />
 
-        {/* Bottom text */}
         <div className="h-4 w-40 mx-auto mt-6 rounded bg-(--bg)" />
       </div>
     </section>

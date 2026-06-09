@@ -79,7 +79,7 @@ const Profile = () => {
             }}
             type="text"
             maxLength={15}
-            placeholder="New username"
+            placeholder="Enter new username"
             className={`
                   
                text-center

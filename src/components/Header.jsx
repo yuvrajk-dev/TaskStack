@@ -137,7 +137,6 @@ const Header = ({ getTasks }) => {
           className={` flex flex-col  ${isClose && "max-h-0 overflow-hidden"} md:overflow-visible  md:max-h-full md:items-start  transition-all
     duration-300   gap-4  md:flex-row  `}
         >
-          {/* Left */}
           <div className=" flex-1 flex    flex-col gap-2">
             <div className="">
               <input
@@ -199,7 +198,6 @@ const Header = ({ getTasks }) => {
             </div>
           </div>
 
-          {/* Center */}
           <div className="flex-2 relative   ">
             <textarea
               onChange={(e) => {
@@ -251,7 +249,6 @@ scrollbar-hide
             )}
           </div>
 
-          {/* Right */}
           <div className="flex-1 flex  flex-col gap-2  ">
             <div>
               <CustomSelect

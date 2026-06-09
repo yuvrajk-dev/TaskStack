@@ -1,4 +1,3 @@
-import React from "react";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 
 const CustomSelect = ({

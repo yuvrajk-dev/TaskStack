@@ -20,7 +20,7 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const [SupabaseErrors, setSupabaseErrors] = useState("");
+  const [supabaseErrors, setSupabaseErrors] = useState("");
 
   const navigate = useNavigate();
 
@@ -92,7 +92,7 @@ const Auth = () => {
                   } else {
                     const { error: profileError } = await supabase
                       .from("profiles")
-                      .insert({ id: authData.user.id, username });
+                      .insert({ id: authData?.user?.id, username });
 
                     if (profileError) throw profileError;
 
@@ -110,7 +110,6 @@ const Auth = () => {
             }}
           >
             {/* username */}
-
             {!isLogin && (
               <div>
                 <input
@@ -118,7 +117,7 @@ const Auth = () => {
                   value={username}
                   onChange={(e) => {
                     setErrors((prev) => {
-                      const { username, ...rest } = prev;
+                      const { username: _username, ...rest } = prev;
                       return rest;
                     });
                     setUsername(e.target.value);
@@ -129,7 +128,7 @@ const Auth = () => {
                   className="
                   w-full
               h-11
-              capitalize
+              
               px-3
               rounded-xl
               border
@@ -144,16 +143,14 @@ const Auth = () => {
                     {errors.username}
                   </p>
                 )}
-                {username.length >= 15 && (
+                {username.length === 15 && (
                   <p className=" text-red-500  text-xs ml-2">
-                    max 15 characters allowed
+                    Maximum length reached
                   </p>
                 )}
               </div>
             )}
-
             {/* email  */}
-
             <div>
               <input
                 value={email}
@@ -161,7 +158,7 @@ const Auth = () => {
                   setEmail(e.target.value);
 
                   setErrors((prev) => {
-                    const { email, ...rest } = prev;
+                    const { email: _email, ...rest } = prev;
                     return rest;
                   });
                   setSupabaseErrors("");
@@ -183,7 +180,6 @@ const Auth = () => {
                 <p className=" text-red-500  text-xs ml-2">{errors.email}</p>
               )}
             </div>
-
             {/* password  */}
             <div className="">
               <input
@@ -191,7 +187,7 @@ const Auth = () => {
                 onChange={(e) => {
                   setPassword(e.target.value);
                   setErrors((prev) => {
-                    const { password, ...rest } = prev;
+                    const { password: _password, ...rest } = prev;
                     return rest;
                   });
                   setSupabaseErrors("");
@@ -214,8 +210,6 @@ const Auth = () => {
               )}
             </div>
 
-            {/* confirmPassword */}
-
             {!isLogin && (
               <div className=" ">
                 <input
@@ -223,7 +217,8 @@ const Auth = () => {
                   onChange={(e) => {
                     setConfirmPassword(e.target.value);
                     setErrors((prev) => {
-                      const { confirmPassword, ...rest } = prev;
+                      const { confirmPassword: _confirmPassword, ...rest } =
+                        prev;
                       return rest;
                     });
                     setSupabaseErrors("");
@@ -242,12 +237,6 @@ const Auth = () => {
             `}
                 />
 
-                {/* {confirmPassword && password !== confirmPassword && (
-                  <p className=" text-red-500  text-xs ml-2">
-                    Password did't match
-                  </p>
-                )} */}
-
                 {errors.confirmPassword && (
                   <p className=" text-red-500  text-xs ml-2">
                     {errors.confirmPassword}
@@ -255,11 +244,10 @@ const Auth = () => {
                 )}
               </div>
             )}
-
             <div className="">
-              {SupabaseErrors && (
+              {supabaseErrors && (
                 <p className=" text-red-500 mb-1 wrap-break-word text-xs mx-2">
-                  {SupabaseErrors}
+                  {supabaseErrors}
                 </p>
               )}
               <button
@@ -276,7 +264,13 @@ const Auth = () => {
               cursor-pointer
             "
               >
-                {loading ? "loading..." : isLogin ? "Login" : "Register"}
+                {loading
+                  ? isLogin
+                    ? "Signing In..."
+                    : "Creating Account..."
+                  : isLogin
+                    ? "Login"
+                    : "Register"}
               </button>
             </div>
           </form>

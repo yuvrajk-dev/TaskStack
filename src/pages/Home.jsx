@@ -6,7 +6,7 @@ import HomeShimmer from "../shimmer/HomeShimmer";
 import toast from "react-hot-toast";
 
 const Home = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [id, setId] = useState("");
@@ -55,7 +55,7 @@ const Home = () => {
     return (
       <div className="flex flex-col    h-screen ">
         <Navbar username={username} email={email} />
-        <Outlet context={[username, id, getData]} />
+        <Outlet context={{ username, id, getData }} />
       </div>
     );
   }

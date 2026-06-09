@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useOutletContext } from "react-router";
 import supabase from "../utils/supabase";
 import toast from "react-hot-toast";
 
 const Profile = () => {
-  const [username, id, getData] = useOutletContext();
+  const { username, id, getData } = useOutletContext();
 
   const [loading, setLoading] = useState(false);
   const currentUsername = username;

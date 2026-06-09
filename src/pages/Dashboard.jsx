@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import TaskSection from "../components/TaskSection";
 import supabase from "../utils/supabase";
 import toast from "react-hot-toast";
+import { useOutletContext } from "react-router";
 
 const Dashboard = () => {
   const [taskObject, setTaskObject] = useState([]);
+  const { id } = useOutletContext();
 
   const [getTaskLoading, setGetTaskLoading] = useState(false);
   const getTasks = async () => {
@@ -15,6 +17,7 @@ const Dashboard = () => {
       const { data, error } = await supabase
         .from("tasks")
         .select("*")
+        .eq("user_id", id)
         .order("created_at", { ascending: false });
 
       if (error) throw error;
@@ -42,7 +45,7 @@ const Dashboard = () => {
       />
       <TaskSection
         taskObject={taskObject}
-        loading={getTaskLoading}
+        getTaskLoading={getTaskLoading}
         getTasks={getTasks}
       />
     </div>

@@ -1,4 +1,3 @@
-import React from "react";
 import supabase from "../utils/supabase";
 import { NavLink, useNavigate } from "react-router";
 import toast from "react-hot-toast";

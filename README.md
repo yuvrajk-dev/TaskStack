@@ -1,10 +1,12 @@
 # TaskStack
 
-TaskStack is a modern task management application designed to help users organize their workflow through a simple and intuitive Kanban board. Users can create tasks, update their progress, and manage work efficiently with a clean and responsive interface.
+A Kanban-style task management application built with React, Tailwind CSS, and Supabase.
+
+TaskStack helps users organize their workflow through a simple and intuitive task board. Users can create tasks, track progress, and manage work efficiently with a clean and responsive interface.
 
 ## Live Demo
 
-🔗 soon
+Coming soon
 
 ## Features
 
@@ -35,24 +37,33 @@ TaskStack is a modern task management application designed to help users organiz
 
 ### Landing Page
 
-![Landing Page](./src/screenshots/landing-page-light.png)
-![Landing Page](./src/screenshots/landing-page-dark.png)
+![Landing Page Light](./src/screenshots/landing-page-light.png)
 
-### Dashboard
+![Landing Page Dark](./src/screenshots/landing-page-dark.png)
 
-![Dashboard](./src/screenshots/login-light.png)
-![Dashboard](./src/screenshots/login-dark.png)
+### Login
 
-![Dashboard](./src/screenshots/register-light.png)
-![Dashboard](./src/screenshots/register-dark.png)
+![Login Light](./src/screenshots/login-light.png)
+
+![Login Dark](./src/screenshots/login-dark.png)
+
+### Register
+
+![Register Light](./src/screenshots/register-light.png)
+
+![Register Dark](./src/screenshots/register-dark.png)
 
 ### Task Board
 
-![Dashboard](./src/screenshots/task-light.png)
-![Dashboard](./src/screenshots/task-dark.png)
+![Task Board Light](./src/screenshots/task-light.png)
 
-![Dashboard](./src/screenshots/edit-light.png)
-![Dashboard](./src/screenshots/edit-light.png)
+![Task Board Dark](./src/screenshots/task-dark.png)
+
+### Edit Task
+
+![Edit Task Light](./src/screenshots/edit-light.png)
+
+![Edit Task Dark](./src/screenshots/edit-dark.png)
 
 ## Installation
 
@@ -90,7 +101,7 @@ npm run build
 
 ## Why I Built This
 
-TaskStack was built to strengthen my understanding of modern frontend development concepts including authentication, route protection, state management, reusable components, responsive design, and integration with backend services.
+TaskStack was built to strengthen my understanding of modern frontend development concepts, including authentication, route protection, state management, reusable components, responsive design, and backend integration with Supabase.
 
 ## Future Improvements
 

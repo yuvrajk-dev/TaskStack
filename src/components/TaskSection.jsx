@@ -47,14 +47,12 @@ const TaskSection = ({ taskObject = [], getTasks, getTaskLoading }) => {
 
                 if (error) {
                   toast.error("Failed to move task");
-                  console.log(error);
                   return;
                 }
 
                 await getTasks();
                 toast.success(`Moved to ${statusCheck}`);
               } catch (error) {
-                console.log(error);
                 toast.error("Something went wrong");
               } finally {
                 setWait(false);

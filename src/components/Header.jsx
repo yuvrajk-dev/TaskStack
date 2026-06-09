@@ -31,6 +31,7 @@ const Header = ({ getTasks }) => {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
+          if (taskBtn) return;
 
           try {
             const validationErrors = validation(
@@ -58,9 +59,9 @@ const Header = ({ getTasks }) => {
             }
 
             const task = {
-              title,
+              title: title.trim(),
+              description: description.trim(),
               user_id: user.id,
-              description,
               status: selectStatus,
               priority: selectPriority,
             };
@@ -70,7 +71,6 @@ const Header = ({ getTasks }) => {
               .insert(task);
 
             if (insertError) {
-              console.log(insertError);
               toast.error("Failed to add task!");
               return;
             }
@@ -80,12 +80,13 @@ const Header = ({ getTasks }) => {
             setDescription("");
             setSelectPriority("");
             setSelectStatus("");
+            setSelectorIsOpen(null);
             setTitle("");
             setError({});
+            setIsClose(false);
             toast.success("Task added!");
           } catch (error) {
-            console.log(error);
-            toast.error("Something went wrong!");
+            toast.error(error.message);
           } finally {
             setTaskBtn(false);
           }

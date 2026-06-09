@@ -114,7 +114,6 @@ cursor-default
                     .eq("id", id);
 
                   if (updateError) {
-                    console.log(updateError);
                     toast.error("Failed to update task");
                     return;
                   }
@@ -124,7 +123,6 @@ cursor-default
                   setError({});
                   toast.success("Task updated");
                 } catch (error) {
-                  console.log(error);
                   toast.error("Something went wrong");
                 } finally {
                   setEditLoading(false);

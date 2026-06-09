@@ -25,8 +25,7 @@ const Dashboard = () => {
       setTaskObject(data);
     } catch (error) {
       setTaskObject([]);
-      console.log(error.message);
-      toast.error("Failed to load tasks");
+      toast.error(error.message);
     } finally {
       setGetTaskLoading(false);
     }

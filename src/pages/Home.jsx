@@ -12,6 +12,8 @@ const Home = () => {
   const [id, setId] = useState("");
 
   const getData = async () => {
+    setLoading(true);
+
     try {
       const {
         data: {
@@ -21,11 +23,9 @@ const Home = () => {
       } = await supabase.auth.getUser();
 
       if (userError) throw userError;
-      // console.log();
 
       setEmail(email);
 
-      setLoading(true);
       const { data, error } = await supabase
         .from("profiles")
         .select("username")
@@ -37,8 +37,7 @@ const Home = () => {
 
       if (data) setUsername(data.username);
     } catch (error) {
-      console.log(error);
-      toast.error("Failed to load profile");
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }

@@ -82,7 +82,6 @@ const DropDown = ({ username, email, setDropDown }) => {
         onClick={async () => {
           const { error } = await supabase.auth.signOut();
           if (error) {
-            console.log(error.message);
             toast.error("Failed to logout");
           } else {
             toast.success("Logged out");

@@ -6,7 +6,7 @@ TaskStack helps users organize their workflow through a simple and intuitive tas
 
 ## Live Demo
 
-Coming soon
+https://taskstack-app.vercel.app
 
 ## Features
 

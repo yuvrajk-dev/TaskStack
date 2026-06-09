@@ -33,7 +33,7 @@ const ThemeToggleButton = () => {
         
          
           transition-transform
-           duration-1000
+           duration-200
     ease-linear
           ${theme ? "translate-y-0" : "-translate-y-8.5"}
         `}

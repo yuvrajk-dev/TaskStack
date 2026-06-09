@@ -96,9 +96,11 @@ const Auth = () => {
 
                     if (profileError) throw profileError;
 
+                    setSupabaseErrors("");
+                    setisLogin(true);
+
                     navigate("/home", { replace: true });
                     toast.success("Account created!");
-                    setSupabaseErrors("");
                   }
                 }
               } catch {
